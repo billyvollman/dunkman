@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="slam-dunk-clip-art.png" type="image/x-icon">
+  <title>Dunkman</title>
+</head>
+
+<body>
+  <div class="mj-basket-bg">
+    <main>
+      <h1>Dunkman</h1>
+      <button onclick="playVid()" type="button">Play Video</button>
+      <div class="game-container">
+        <div class="letters-and-guessword">
+          <div class="row" id="shots">Shots Remaining</br>7</div>
+          <div class="row">
+            <div class="letter">A</div>
+            <div class="letter">B</div>
+            <div class="letter">C</div>
+            <div class="letter">D</div>
+            <div class="letter">E</div>
+            <div class="letter">F</div>
+          </div>
+          <div class="row">
+            <div class="letter">G</div>
+            <div class="letter">H</div>
+            <div class="letter">I</div>
+            <div class="letter">J</div>
+            <div class="letter">K</div>
+            <div class="letter">L</div>
+            <div class="letter">M</div>
+          </div>
+          <div class="row">
+            <div class="letter">N</div>
+            <div class="letter">O</div>
+            <div class="letter">P</div>
+            <div class="letter">Q</div>
+            <div class="letter">R</div>
+            <div class="letter">S</div>
+          </div>
+          <div class="row">
+            <div class="letter">T</div>
+            <div class="letter">U</div>
+            <div class="letter">V</div>
+            <div class="letter">W</div>
+            <div class="letter">X</div>
+            <div class="letter">Y</div>
+            <div class="letter">Z</div>
+          </div>
+          <div class="row">
+            <div class="guess-title">Guess the word</div>
+            <div class="word">
+            </div>
+          </div>
+        </div>
+        <div class="video-container">
+          <video id="myVideo" muted>
+            <source src="jordandunks_trim.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+<script src="app.js"></script>
+
+</html>

@@ -1,0 +1,161 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+}
+
+body {
+  background: url('fans_bg.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.mj-basket-bg {
+  min-height: 100vh;
+  background: url('athlete-drawing-michael-jordan-4.png'),
+    url('basketball_rim_no_bg.png');
+  background-repeat: no-repeat, no-repeat;
+  background-position: 160% top, -5% 10%;
+  background-size: 50%, 20%;
+  background-color: rgba(196, 196, 196, 0.7);
+  background-blend-mode: screen;
+}
+
+main {
+  /* background-color: mistyrose; */
+  width: 70%;
+  margin: 0 auto;
+  /* font-family: sans-serif; */
+}
+
+.game-container {
+  display: flex;
+  /* width: 100%; */
+  align-items: center;
+  /* background-color: aqua; */
+  /* flex: 1; */
+}
+
+.letters-and-guessword {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  /* width: 50%; */
+  margin: 5% 2.5% 5% 5%;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 5%;
+  border-radius: 2rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#shots {
+  padding: 5% 0;
+  font-size: 2.5vw;
+  text-align: center;
+}
+
+.row {
+  /* width: 100%; */
+  display: flex;
+  /* flex: 1; */
+  flex-wrap: wrap;
+  margin: 0 auto;
+  /* border: solid 2px red; */
+  align-items: center;
+  justify-content: center;
+}
+
+.row .letter:first-of-type {
+  margin-left: 0;
+}
+
+.letter {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3vw;
+  width: 3vw;
+  margin-left: 2%;
+  font-size: 2vw;
+  border-radius: 0.5rem;
+  border: 0.2rem solid #ba2d31;
+  margin-bottom: 2%;
+  color: white;
+  background-color: #d53338;
+  background-image: linear-gradient(to bottom right, #ff7d7d 0%, #d53338 100%);
+}
+
+.clicked {
+  border: 0.2rem solid #999999;
+  background-color: #cccccc;
+  background-image: linear-gradient(to bottom right, #cccccc 0%, #bfbfbf 100%);
+  color: #666666;
+}
+
+.guess-title {
+  margin-top: 5%;
+  font-size: 2vw;
+}
+
+.word {
+  display: flex;
+  flex-direction: column;
+  margin: 2vh 0;
+  font-size: 2.5vw;
+  /* border: solid 2px red; */
+}
+
+.guess-letter-char {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+  border-bottom: 2px solid red;
+  height: 2vw;
+  width: 2vw;
+}
+
+.guess-letter-space {
+}
+
+.video-container {
+  height: 50vh;
+  width: 50%;
+  overflow: hidden;
+  position: relative;
+  border: 0.5rem solid rgba(244, 65, 51, 0.7);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 5% 5% 5% 2.5%;
+  border-radius: 5px;
+  /* padding: 5%; */
+}
+
+video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 1275px) {
+  video {
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 650px) {
+  main {
+    width: 80%;
+  }
+}
+
+@media (max-width: 460px) {
+  main {
+    width: 95%;
+  }
+}
