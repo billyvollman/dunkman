@@ -6,6 +6,8 @@ let shots = document.getElementById("shots")
 let shotsRemaining = document.getElementById("shots").textContent.split("")
 let shotsRemainingNum = Number(shotsRemaining[shotsRemaining.length - 1])
 
+const isVideoPlaying = video => !!(video.currentTime > 0 && !video.paused && !video.ended && video.readyState > 2)
+
 let count = 0
 let result = ""
 let randomWord = "Michael Jordan".toUpperCase().split("")
@@ -122,7 +124,7 @@ function updateShotsRemaining() {
 }
 
 function letterClick(e) {
-  if (!e.target.classList.contains("clicked") && result !== "blocked" && result !== "dunk") {
+  if (!e.target.classList.contains("clicked") && result !== "blocked" && result !== "dunk" && vid.paused) {
     e.target.classList.toggle("clicked")
     let character = e.target.textContent
     if (isLetterInWord(character)) {
