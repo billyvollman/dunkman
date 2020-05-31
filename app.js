@@ -1,3 +1,51 @@
+let teamNames = []
+let randomWord = ""
+
+function loadGuessWordToDom() {
+  let row = '<div class="row">'
+
+  randomWord.forEach(char => {
+    if (char === " ") {
+      row += `</div><div class="row"><div class="guess-letter-space">${char}</div></div><div class="row">`
+    } else {
+      char = ''
+      row += `<div class="guess-letter-char">${char}</div>`
+    }
+
+    // char === " "
+    //   ? div += `<div class="guess-letter-space">${char}</div>`
+    //   : div += `<div class="guess-letter-char">${char}</div>`
+  })
+  // guessWord.innerHTML = div
+  row += '</div>'
+  guessWord.innerHTML = row
+}
+
+function createGuessWord() {
+  let randomNum = Math.floor(Math.random() * teamNames.length - 1) + 1
+  randomWord = teamNames[randomNum].toUpperCase().split("")
+  loadGuessWordToDom()
+}
+
+const saveTeams = (teams) => {
+  teams.forEach(team => teamNames = [...teamNames, team.full_name])
+  createGuessWord()
+}
+
+const fetchTeams = () => {
+  axios.get('https://www.balldontlie.io/api/v1/teams')
+    .then(response => {
+      const teams = response.data.data;
+      console.log(`GET list teams`, teams);
+      saveTeams(teams)
+    })
+    .catch(error => console.error(error));
+};
+
+fetchTeams();
+
+
+
 var vid = document.getElementById("myVideo");
 let videoSrc = document.querySelector("source")
 let guessWord = document.querySelector(".word")
@@ -6,38 +54,45 @@ let shots = document.getElementById("shots")
 let shotsRemaining = document.getElementById("shots").textContent.split("")
 let shotsRemainingNum = Number(shotsRemaining[shotsRemaining.length - 1])
 
-const isVideoPlaying = video => !!(video.currentTime > 0 && !video.paused && !video.ended && video.readyState > 2)
+// const isVideoPlaying = video => !!(video.currentTime > 0 && !video.paused && !video.ended && video.readyState > 2)
 
 let count = 0
 let result = ""
-let randomWord = "Michael Jordan".toUpperCase().split("")
 let videoTime = 0
 
+
+// let randomNum = Math.floor(Math.random() * teamNames.length - 1) + 1
+// console.log(randomNum)
+// console.log(teamNames[randomNum])
+// let randomWord = teamNames[randomNum].toUpperCase().split("")
+
+
 // Filtering random word to remove duplicate letters.  Will use later to check length against visible letters array to find winner
-let uniqueRandomWord = [...new Set(randomWord)]
-let randomWordFiltered = randomWord.filter((v, i) => randomWord.indexOf(v) === i)
-let uniqueRandomWordNoEmptyChar = uniqueRandomWord.filter(char => char !== " ")
-let randomWordFilteredNoEmptyChar = randomWordFiltered.filter(char => char !== " ")
+// let uniqueRandomWord = [...new Set(randomWord)]
+// let randomWordFiltered = randomWord.filter((v, i) => randomWord.indexOf(v) === i)
+// let uniqueRandomWordNoEmptyChar = uniqueRandomWord.filter(char => char !== " ")
+// let randomWordFilteredNoEmptyChar = randomWordFiltered.filter(char => char !== " ")
 
 let visibleLetters = []
 // let div = ''
-let row = '<div class="row">'
+// let row = '<div class="row">'
 
-randomWord.forEach(char => {
-  if (char === " ") {
-    row += `</div><div class="row"><div class="guess-letter-space">${char}</div></div><div class="row">`
-  } else {
-    char = ''
-    row += `<div class="guess-letter-char">${char}</div>`
-  }
+// randomWord.forEach(char => {
+//   if (char === " ") {
+//     row += `</div><div class="row"><div class="guess-letter-space">${char}</div></div><div class="row">`
+//   } else {
+//     char = ''
+//     row += `<div class="guess-letter-char">${char}</div>`
+//   }
 
-  // char === " "
-  //   ? div += `<div class="guess-letter-space">${char}</div>`
-  //   : div += `<div class="guess-letter-char">${char}</div>`
-})
-// guessWord.innerHTML = div
-row += '</div>'
-guessWord.innerHTML = row
+//   // char === " "
+//   //   ? div += `<div class="guess-letter-space">${char}</div>`
+//   //   : div += `<div class="guess-letter-char">${char}</div>`
+// })
+// // guessWord.innerHTML = div
+// row += '</div>'
+// guessWord.innerHTML = row
+
 
 function winner() {
   vid.playbackRate = 0.3;
@@ -51,18 +106,11 @@ function pauseVid() {
   videoTime = vid.currentTime
 }
 
-// function checkResult() {
-//   if (result === "blocked") {
-//     console.log('blocked')
-//   }
-// }
-
 function playVid() {
-
   if (result === "blocked") {
     console.log('blocked')
     videoSrc.setAttribute('src', 'jordandunks_trim.mp4')
-    vid.load();
+    // vid.load();
     vid.currentTime = videoTime
     vid.playbackRate = 0.75;
     vid.play()
@@ -82,6 +130,11 @@ function playVid() {
 }
 
 function checkForWin() {
+  // Filtering random word to remove duplicate letters.  When you click letter button it adds the letter only once to the visible letters array.  If random word is not filtered to remove duplicates the lengths will always be different.
+  let uniqueRandomWord = [...new Set(randomWord)]
+  let randomWordFiltered = randomWord.filter((v, i) => randomWord.indexOf(v) === i)
+  let uniqueRandomWordNoEmptyChar = uniqueRandomWord.filter(char => char !== " ")
+  let randomWordFilteredNoEmptyChar = randomWordFiltered.filter(char => char !== " ")
   if (visibleLetters.length === uniqueRandomWordNoEmptyChar.length) {
     console.log("winner")
     return "blocked"
