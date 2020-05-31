@@ -7,7 +7,7 @@ let shotsRemaining = document.getElementById("shots").textContent.split("")
 let shotsRemainingNum = Number(shotsRemaining[shotsRemaining.length - 1])
 
 let count = 0
-let result = "dunk"
+let result = ""
 let randomWord = "Michael Jordan".toUpperCase().split("")
 let videoTime = 0
 
@@ -62,12 +62,13 @@ function playVid() {
     videoSrc.setAttribute('src', 'jordandunks_trim.mp4')
     vid.load();
     vid.currentTime = videoTime
-    vid.playbackRate = 0.4;
+    vid.playbackRate = 0.75;
     vid.play()
   } else {
     count++
     vid.playbackRate = 0.75;
     if (count > 6) {
+      result = "dunk"
       vid.play();
       count = 0
       setTimeout(function () { winner(); }, 3000);
@@ -83,7 +84,7 @@ function checkForWin() {
     console.log("winner")
     return "blocked"
   } else {
-    return "dunk"
+    return ""
   }
 }
 
@@ -121,24 +122,26 @@ function updateShotsRemaining() {
 }
 
 function letterClick(e) {
-  e.target.classList.toggle("clicked")
-  let character = e.target.textContent
-  if (isLetterInWord(character)) {
-    visibleLetters = [...visibleLetters, character]
-    result = checkForWin()
-    console.log(result)
-    if (result === "blocked") {
+  if (!e.target.classList.contains("clicked") && result !== "blocked" && result !== "dunk") {
+    e.target.classList.toggle("clicked")
+    let character = e.target.textContent
+    if (isLetterInWord(character)) {
+      visibleLetters = [...visibleLetters, character]
+      result = checkForWin()
+      console.log(result)
+      if (result === "blocked") {
+        playVid()
+      }
+    } else {
+      updateShotsRemaining()
       playVid()
     }
-  } else {
-    updateShotsRemaining()
-    playVid()
   }
 }
 
 function checkVidCurrentTime() {
   if (vid.currentTime > 4.5 && result === "blocked") {
-    result = "dunk"
+    // result = "dunk"
     vid.pause();
     videoSrc.setAttribute('src', 'blocked_shot_trim.mp4')
     vid.load();
@@ -149,5 +152,6 @@ function checkVidCurrentTime() {
 }
 
 setInterval(function () { checkVidCurrentTime(); }, 500);
+
 
 letters.forEach(letter => letter.addEventListener('click', letterClick))
