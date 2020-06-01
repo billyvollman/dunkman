@@ -1,3 +1,15 @@
+let vid = document.getElementById("myVideo");
+let videoSrc = document.querySelector("source")
+let guessWord = document.querySelector(".word")
+let letters = document.querySelectorAll(".letter")
+let shots = document.getElementById("shots")
+let shotsRemaining = document.getElementById("shots").textContent.split("")
+let shotsRemainingNum = Number(shotsRemaining[shotsRemaining.length - 1])
+
+let count = 0
+let result = ""
+let videoTime = 0
+let visibleLetters = []
 let teamNames = []
 let randomWord = ""
 
@@ -29,6 +41,7 @@ function createGuessWord() {
 
 const saveTeams = (teams) => {
   teams.forEach(team => teamNames = [...teamNames, team.full_name])
+  // teams.forEach(team => teamNames = [...teamNames, team])
   createGuessWord()
 }
 
@@ -40,25 +53,13 @@ const fetchTeams = () => {
       saveTeams(teams)
     })
     .catch(error => console.error(error));
+  // saveTeams(["San Antonio Spurs Miami Heat San Antonio Spurs Miami Heat"])
 };
 
 fetchTeams();
 
 
-
-var vid = document.getElementById("myVideo");
-let videoSrc = document.querySelector("source")
-let guessWord = document.querySelector(".word")
-let letters = document.querySelectorAll(".letter")
-let shots = document.getElementById("shots")
-let shotsRemaining = document.getElementById("shots").textContent.split("")
-let shotsRemainingNum = Number(shotsRemaining[shotsRemaining.length - 1])
-
 // const isVideoPlaying = video => !!(video.currentTime > 0 && !video.paused && !video.ended && video.readyState > 2)
-
-let count = 0
-let result = ""
-let videoTime = 0
 
 
 // let randomNum = Math.floor(Math.random() * teamNames.length - 1) + 1
@@ -73,7 +74,7 @@ let videoTime = 0
 // let uniqueRandomWordNoEmptyChar = uniqueRandomWord.filter(char => char !== " ")
 // let randomWordFilteredNoEmptyChar = randomWordFiltered.filter(char => char !== " ")
 
-let visibleLetters = []
+
 // let div = ''
 // let row = '<div class="row">'
 
