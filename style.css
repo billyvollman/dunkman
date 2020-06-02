@@ -63,7 +63,7 @@ main {
   background-color: rgba(255, 255, 255, 0.8);
   /* padding: 5%; */
   border-radius: 1rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   overflow: auto;
 }
 
@@ -132,11 +132,30 @@ main {
   background-image: linear-gradient(to bottom right, #ff7d7d 0%, #d53338 100%);
 }
 
+.letter:hover {
+  box-shadow: 0 2px 4px 0 rgba(36, 36, 36, 0.2);
+  transform: scale(1.05);
+}
+
 .clicked {
   border: 0.2rem solid #999999;
   background-color: #cccccc;
   background-image: linear-gradient(to bottom right, #cccccc 0%, #bfbfbf 100%);
   color: #666666;
+  animation: scale 0.1s;
+  opacity: 0.7;
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .guess-word-section {
@@ -182,7 +201,7 @@ main {
   overflow: hidden;
   position: relative;
   border: 0.5rem solid rgba(244, 65, 51, 0.7);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   /* margin: 5% 5% 5% 2.5%; */
   margin-left: 2.5%;
   border-radius: 1rem;
