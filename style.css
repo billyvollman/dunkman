@@ -46,8 +46,14 @@ section {
 }
 
 .img-bull-logo {
-  width: 3vw;
+  width: 2.5vw;
   min-width: 35px;
+  cursor: pointer;
+}
+
+.play-again {
+  font-size: 12px;
+  cursor: pointer;
 }
 
 .img-dunk-logo {

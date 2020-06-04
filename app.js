@@ -6,6 +6,9 @@ let shots = document.querySelector(".count")
 let guessWordSection = document.querySelector(".guess-word-section")
 let span = document.querySelectorAll("span")
 
+let bullsLogo = document.querySelector(".img-bull-logo")
+let playAgain = document.querySelector(".play-again")
+
 
 // let shotsRemaining = document.querySelector(".shots").textContent.split("")
 // let shotsRemainingNum = Number(shotsRemaining[shotsRemaining.length - 1])
@@ -240,8 +243,14 @@ function checkVidCurrentTime() {
   }
 }
 
+function newGame() {
+  location.reload()
+}
+
 setInterval(function () { checkVidCurrentTime(); }, 500);
 
 
 letters.forEach(letter => letter.addEventListener('click', letterClick))
 letters.forEach(letter => letter.addEventListener('mousedown', mousedown))
+bullsLogo.addEventListener('click', newGame)
+playAgain.addEventListener('click', newGame)
