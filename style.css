@@ -12,6 +12,7 @@ body {
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  font-family: 'Roboto Slab', serif;
 }
 
 .mj-basket-bg {
@@ -90,10 +91,20 @@ main {
   background-color: #ba2d31;
 }
 
-#shots {
-  padding: 5% 0;
+.shots {
+  font-family: 'Arvo', serif;
+  padding: 5% 0 0;
   font-size: 2.5vw;
   text-align: center;
+}
+
+.count {
+  padding: 0 0 5%;
+}
+
+.red {
+  color: red;
+  animation: flash 1s;
 }
 
 .row {
@@ -135,6 +146,20 @@ main {
 .letter:hover {
   box-shadow: 0 2px 4px 0 rgba(36, 36, 36, 0.2);
   transform: scale(1.05);
+  cursor: pointer;
+}
+
+.letter:active {
+  animation: mousedown 1s infinite;
+}
+
+@keyframes mousedown {
+  0% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(0.95);
+  }
 }
 
 .clicked {
@@ -189,6 +214,15 @@ main {
   border-bottom: 2px solid red;
   height: 2.5vw;
   width: 2.5vw;
+}
+
+.guess-letter-char > span {
+  /* animation: flash linear 1s; */
+  /* color: green; */
+  /* font-size: 50px; */
+  /* animation-name: blinker; */
+  /* animation-duration: 1s; */
+  animation: flash 1s;
 }
 
 .video-container {
@@ -293,7 +327,7 @@ video {
     margin: 5% 0 0 0;
   }
 
-  #shots {
+  .shots {
     padding: 0 0 5%;
     font-size: 4vw;
   }

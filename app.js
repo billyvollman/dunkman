@@ -2,9 +2,13 @@ let vid = document.getElementById("myVideo");
 let videoSrc = document.querySelector("source")
 let guessWord = document.querySelector(".word")
 let letters = document.querySelectorAll(".letter")
-let shots = document.getElementById("shots")
-let shotsRemaining = document.getElementById("shots").textContent.split("")
-let shotsRemainingNum = Number(shotsRemaining[shotsRemaining.length - 1])
+let shots = document.querySelector(".count")
+let guessWordSection = document.querySelector(".guess-word-section")
+let span = document.querySelectorAll("span")
+
+
+// let shotsRemaining = document.querySelector(".shots").textContent.split("")
+// let shotsRemainingNum = Number(shotsRemaining[shotsRemaining.length - 1])
 
 let count = 0
 let result = ""
@@ -40,20 +44,21 @@ function createGuessWord() {
 }
 
 const saveTeams = (teams) => {
-  teams.forEach(team => teamNames = [...teamNames, team.full_name])
-  // teams.forEach(team => teamNames = [...teamNames, team])
+  // teams.forEach(team => teamNames = [...teamNames, team.full_name])
+  teams.forEach(team => teamNames = [...teamNames, team])
   createGuessWord()
 }
 
 const fetchTeams = () => {
-  axios.get('https://www.balldontlie.io/api/v1/teams')
-    .then(response => {
-      const teams = response.data.data;
-      console.log(`GET list teams`, teams);
-      saveTeams(teams)
-    })
-    .catch(error => console.error(error));
+  // axios.get('https://www.balldontlie.io/api/v1/teams')
+  //   .then(response => {
+  //     const teams = response.data.data;
+  //     console.log(`GET list teams`, teams);
+  //     saveTeams(teams)
+  //   })
+  //   .catch(error => console.error(error));
   // saveTeams(["San Antonio Spurs Miami Heat San Antonio Spurs Miami Heat"])
+  saveTeams(["San Antonio Spurs"])
 };
 
 fetchTeams();
@@ -102,6 +107,8 @@ function winner() {
 }
 
 function pauseVid() {
+  guessWordSection.classList.remove("animate__animated")
+  guessWordSection.classList.remove("animate__shakeX")
   vid.pause();
   console.log(vid.currentTime)
   videoTime = vid.currentTime
@@ -144,6 +151,12 @@ function checkForWin() {
   }
 }
 
+function changeColor() {
+  // span.forEach(char => char.classList.toggle("black"))
+  // span.forEach(char => char.style.color = "black")
+  shots.classList.toggle("red")
+}
+
 function updateWord(displayChar) {
   row = '<div class="row">'
 
@@ -151,8 +164,14 @@ function updateWord(displayChar) {
     if (char === " ") {
       row += `</div><div class="row"><div class="guess-letter-space">${char}</div></div><div class="row">`
     } else if (char === displayChar || visibleLetters.includes(char)) {
-      char === displayChar ? char = displayChar : char = char
-      row += `<div class="guess-letter-char">${char}</div>`
+      // char === displayChar ? char = displayChar : char = char
+      // row += `<div class="guess-letter-char"><span>${char}</span></div>`
+      if (char === displayChar) {
+        char = displayChar
+        row += `<div class="guess-letter-char"><span>${char}</span></div>`
+      } else {
+        row += `<div class="guess-letter-char">${char}</div>`
+      }
     } else {
       char = ''
       row += `<div class="guess-letter-char">${char}</div>`
@@ -173,8 +192,13 @@ function isLetterInWord(char) {
 }
 
 function updateShotsRemaining() {
-  shotsRemainingNum -= 1
-  shots.innerHTML = `Shots Remaining </br>${shotsRemainingNum} `
+  // shotsRemainingNum -= 1
+  // shots.innerHTML = `Shots Remaining </br>${shotsRemainingNum.toString().padStart(2, 0)} `
+
+  shots.textContent = (Number(shots.textContent) - 1).toString().padStart(2, 0)
+  shots.classList.toggle("red")
+  setTimeout(function () { changeColor(); }, 1000);
+
 }
 
 function letterClick(e) {
@@ -189,14 +213,23 @@ function letterClick(e) {
         playVid()
       }
     } else {
+      guessWordSection.classList.add("animate__animated")
+      guessWordSection.classList.add("animate__shakeX")
       updateShotsRemaining()
       playVid()
     }
   }
 }
 
+function mousedown(e) {
+  console.log('mouse down working')
+  if (!e.target.classList.contains("clicked") && result !== "blocked" && result !== "dunk" && vid.paused) {
+    console.log(e.target.classList)
+  }
+}
+
 function checkVidCurrentTime() {
-  if (vid.currentTime > 4.5 && result === "blocked") {
+  if (vid.currentTime > 4.4 && result === "blocked") {
     // result = "dunk"
     vid.pause();
     videoSrc.setAttribute('src', 'blocked_shot_trim.mp4')
@@ -211,3 +244,4 @@ setInterval(function () { checkVidCurrentTime(); }, 500);
 
 
 letters.forEach(letter => letter.addEventListener('click', letterClick))
+letters.forEach(letter => letter.addEventListener('mousedown', mousedown))
