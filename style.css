@@ -6,6 +6,72 @@
 html {
 }
 
+header {
+  display: flex;
+  align-items: center;
+  /* background-color: rgb(0, 0, 0, 0.8); */
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+section {
+  /* background-color: green; */
+  /* border: solid 1px black; */
+  flex: 1;
+  display: flex;
+  /* color: rgba(225, 222, 222, 1); */
+  /* color: red; */
+  margin: 15px 0;
+}
+
+.title {
+  /* display: flex; */
+  /* align-items: center;
+  flex-direction: column;
+  margin-right: auto; */
+  padding: 0 20px;
+  font-size: 35px;
+  /* border: solid 1px black; */
+}
+
+.logo {
+  /* border: solid 5px rgba(225, 222, 222, 1); */
+  border: solid 3px black;
+  border-radius: 5px;
+  flex: 0;
+}
+
+.bulls-logo {
+  flex: 1;
+  text-align: center;
+}
+
+.img-bull-logo {
+  width: 3vw;
+  min-width: 35px;
+}
+
+.img-dunk-logo {
+  /* border: solid 1px blue; */
+  /* width: 5vw; */
+  /* width: 20%; */
+  width: 2.5vw;
+  min-width: 35px;
+  /* filter: invert(1); */
+  padding-bottom: 5px;
+}
+
+.rules {
+  /* border: solid 1px black; */
+  flex: 1;
+  text-align: center;
+  font-size: 26px;
+}
+
+.rules:hover {
+  color: #ba2d31;
+  cursor: pointer;
+}
+
 body {
   background: url('fans_bg.jpg');
   background-position: center center;
@@ -20,7 +86,7 @@ body {
   background: url('athlete-drawing-michael-jordan-4.png'),
     url('basketball_rim_no_bg.png');
   background-repeat: no-repeat, no-repeat;
-  background-position: 160% top, -5% 10%;
+  background-position: 160% -5%, -5% 5%;
   background-size: 50%, 20%;
   background-color: rgba(196, 196, 196, 0.7);
   background-blend-mode: screen;
@@ -29,14 +95,14 @@ body {
 main {
   /* background-color: mistyrose; */
   width: 70%;
-  margin: 0 auto;
+  margin: auto;
   /* font-family: sans-serif; */
 }
 
 .game-container {
   display: flex;
   height: 75vh;
-  padding: 5%;
+  padding: 5% 5% 5%;
   /* width: 100%;
   height: 100%; */
   align-items: center;
@@ -103,7 +169,7 @@ main {
 }
 
 .red {
-  color: red;
+  color: #d53338;
   animation: flash 1s;
 }
 
@@ -211,7 +277,7 @@ main {
   justify-content: center;
   align-items: center;
   margin: 5px;
-  border-bottom: 2px solid red;
+  border-bottom: 2px solid #d53338;
   height: 2.5vw;
   width: 2.5vw;
 }
