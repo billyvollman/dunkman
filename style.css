@@ -477,6 +477,10 @@ video {
 } */
 
 @media (max-width: 1100px) {
+  .mj-basket-bg {
+    background-position: 165% 2%, -5% 5%;
+  }
+
   main {
     width: 95%;
   }
