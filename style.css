@@ -6,6 +6,55 @@
 html {
 }
 
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 40px 20px 20px;
+  border: 1px solid #888;
+  width: 40%; /* Could be more or less, depending on screen size */
+  border-radius: 5px;
+}
+
+.modal-content > p {
+  font-size: 1vw;
+  padding-bottom: 10px;
+  text-align: justify;
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  left: 90%;
+  top: 2px;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #ba2d31;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 header {
   display: flex;
   align-items: center;
@@ -24,12 +73,11 @@ section {
 }
 
 .title {
-  /* display: flex; */
-  /* align-items: center;
+  display: flex;
   flex-direction: column;
-  margin-right: auto; */
-  padding: 0 20px;
-  font-size: 35px;
+  margin-right: auto;
+  padding: 0 5%;
+  font-size: 3rem;
   /* border: solid 1px black; */
 }
 
@@ -40,20 +88,31 @@ section {
   flex: 0;
 }
 
-.bulls-logo {
+.play-again-container {
+  display: flex;
   flex: 1;
-  text-align: center;
+  justify-content: center;
+  /* border: solid 1px black; */
 }
 
 .img-bull-logo {
   width: 2.5vw;
   min-width: 35px;
-  cursor: pointer;
 }
 
 .play-again {
+  text-align: center;
+  /* background-color: green; */
   font-size: 12px;
   cursor: pointer;
+}
+
+.play-again:hover {
+  transform: scale(1.05);
+}
+
+.play-again:active {
+  animation: mousedown 1s infinite;
 }
 
 .img-dunk-logo {
@@ -66,16 +125,28 @@ section {
   padding-bottom: 5px;
 }
 
-.rules {
-  /* border: solid 1px black; */
+.rules-container {
+  display: flex;
   flex: 1;
-  text-align: center;
+  /* border: solid 1px black; */
+  justify-content: center;
   font-size: 26px;
+}
+
+.rules {
+  flex: 0;
+  /* background-color: blue; */
+  /* border: solid 1px black; */
 }
 
 .rules:hover {
   color: #ba2d31;
   cursor: pointer;
+  transform: scale(1.05);
+}
+
+.play-again:active {
+  animation: mousedown 1s infinite;
 }
 
 body {
@@ -350,7 +421,7 @@ video {
   }
 } */
 
-@media (max-width: 950px) {
+@media (max-width: 1100px) {
   main {
     width: 95%;
   }
@@ -361,6 +432,16 @@ video {
 
   .video-container {
     height: 70%;
+  }
+
+  .modal-content {
+    width: 60%;
+  }
+
+  .modal-content > p {
+    font-size: 3vw;
+    padding-bottom: 10px;
+    text-align: justify;
   }
 }
 
@@ -428,5 +509,36 @@ video {
     height: 70%;
     width: 85%;
     margin: 0;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    padding: 5%;
+  }
+
+  .empty {
+    flex: 0;
+  }
+
+  .rules-container {
+    font-size: 12px;
+  }
+
+  .img-bull-logo {
+    min-width: 30px;
+  }
+
+  .play-again {
+    font-size: 10px;
+  }
+
+  .modal-content {
+    width: 60%;
+  }
+
+  .modal-content > p {
+    font-size: 3vw;
+    padding-bottom: 10px;
+    text-align: justify;
   }
 }

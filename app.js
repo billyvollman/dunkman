@@ -17,8 +17,35 @@ let count = 0
 let result = ""
 let videoTime = 0
 let visibleLetters = []
-let teamNames = []
+// let teamNames = []
+// let playerNames = ["Michael Jordan", "Kareem AbdulJabbar", "Carmelo Anthony", "Ray Allen", "Kobe Bryant", "Larry Bird", "Julius Erving", "Patrick Ewing", "Tim Duncan", "Kevin Durant", "Clyde Drexler", "Kevin Garnett", "Dwight Howard", "James Harden", "LeBron James", "Magic Johnson", "Karl Malone", "Reggie Miller", "Dirk Nowitzki", "Steve Nash", "Shaquille ONeal", "Hakeem Olajuwon", "Charles Barkley", "Wilt Chamberlain", "Vince Carter", "Stephen Curry", "Dominique Wilkins", "John Stockton", "John Starks", "Steve Francis", "Tracy McGrady", "Bob Cousy", "Scottie Pippen", "BJ Armstrong", "Bill Cartwright", "Horace Grant", "John Paxson", "Will Perdue", "Dennis Rodman", "Luc Longley", "Toni Kukoc", "Steve Kerr", "Ron Harper", "Phil Jackson", "Rudy Tomjanovich", "Dikembe Mutombo"]
 let randomWord = ""
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var modalBtn = document.querySelector(".rules");
+
+// Get the <span> element that closes the modal
+var closeModal = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+modalBtn.onclick = function () {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+closeModal.onclick = function () {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
 
 function loadGuessWordToDom() {
   let row = '<div class="row">'
@@ -40,28 +67,44 @@ function loadGuessWordToDom() {
   guessWord.innerHTML = row
 }
 
-function createGuessWord() {
-  let randomNum = Math.floor(Math.random() * teamNames.length - 1) + 1
-  randomWord = teamNames[randomNum].toUpperCase().split("")
+function createGuessWord(teamsAndPlayersNames) {
+
+  let randomNum = Math.floor(Math.random() * teamsAndPlayersNames.length - 1) + 1
+  randomWord = teamsAndPlayersNames[randomNum].toUpperCase().split("")
   loadGuessWordToDom()
+  console.log(randomNum)
+  console.log(teamsAndPlayersNames.length)
+  console.log(teamsAndPlayersNames)
+
 }
 
-const saveTeams = (teams) => {
-  // teams.forEach(team => teamNames = [...teamNames, team.full_name])
-  teams.forEach(team => teamNames = [...teamNames, team])
-  createGuessWord()
+const saveTeamsAndPlayers = (teams) => {
+  let playerNames = ["Michael Jordan", "Kareem AbdulJabbar", "Carmelo Anthony", "Ray Allen", "Kobe Bryant", "Larry Bird", "Julius Erving", "Patrick Ewing", "Tim Duncan", "Kevin Durant", "Clyde Drexler", "Kevin Garnett", "Dwight Howard", "James Harden", "LeBron James", "Magic Johnson", "Karl Malone", "Reggie Miller", "Dirk Nowitzki", "Steve Nash", "Shaquille ONeal", "Hakeem Olajuwon", "Charles Barkley", "Wilt Chamberlain", "Vince Carter", "Stephen Curry", "Dominique Wilkins", "John Stockton", "John Starks", "Steve Francis", "Tracy McGrady", "Bob Cousy", "Scottie Pippen", "BJ Armstrong", "Bill Cartwright", "Horace Grant", "John Paxson", "Will Perdue", "Dennis Rodman", "Luc Longley", "Toni Kukoc", "Steve Kerr", "Ron Harper", "Phil Jackson", "Rudy Tomjanovich", "Dikembe Mutombo"]
+  let teamNames = []
+  teams.forEach(team => {
+    if (team.full_name === "Philadelphia 76ers") {
+      console.log(team.full_name)
+      teamNames = [...teamNames, "Philadelphia Seventy Sixers"]
+    } else {
+      teamNames = [...teamNames, team.full_name]
+    }
+  })
+  // teams.forEach(team => teamNames = [...teamNames, team])
+
+  teamsAndPlayersNames = [...teamNames, ...playerNames]
+  createGuessWord(teamsAndPlayersNames)
 }
 
 const fetchTeams = () => {
-  // axios.get('https://www.balldontlie.io/api/v1/teams')
-  //   .then(response => {
-  //     const teams = response.data.data;
-  //     console.log(`GET list teams`, teams);
-  //     saveTeams(teams)
-  //   })
-  //   .catch(error => console.error(error));
-  // saveTeams(["San Antonio Spurs Miami Heat San Antonio Spurs Miami Heat"])
-  saveTeams(["San Antonio Spurs"])
+  axios.get('https://www.balldontlie.io/api/v1/teams')
+    .then(response => {
+      const teams = response.data.data;
+      console.log(`GET list teams`, teams);
+      saveTeamsAndPlayers(teams)
+    })
+    .catch(error => console.error(error));
+  // saveTeamsAndPlayers(["San Antonio Spurs Miami Heat San Antonio Spurs Miami Heat"])
+  // saveTeamsAndPlayers(["San Antonio Spurs"])
 };
 
 fetchTeams();
