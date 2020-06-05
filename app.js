@@ -5,6 +5,8 @@ let letters = document.querySelectorAll(".letter")
 let shots = document.querySelector(".count")
 let guessWordSection = document.querySelector(".guess-word-section")
 let span = document.querySelectorAll("span")
+let dunkedOn = document.querySelector(".got-dunked-on")
+let dunkedBlocked = document.querySelector(".dunk-block")
 
 let bullsLogo = document.querySelector(".img-bull-logo")
 let playAgain = document.querySelector(".play-again")
@@ -146,10 +148,20 @@ fetchTeams();
 // guessWord.innerHTML = row
 
 
-function winner() {
+function dunk() {
   vid.playbackRate = 0.3;
   vid.currentTime = 4.4
+  vid.style.opacity = 0.35
   vid.play()
+  dunkedOn.style.display = 'unset'
+}
+
+function block() {
+  vid.currentTime = 0
+  vid.playbackRate = 0.3;
+  vid.style.opacity = 0.35
+  vid.play()
+  dunkedBlocked.style.display = 'unset'
 }
 
 function pauseVid() {
@@ -175,7 +187,7 @@ function playVid() {
       result = "dunk"
       vid.play();
       count = 0
-      setTimeout(function () { winner(); }, 3000);
+      setTimeout(function () { dunk(); }, 3000);
     } else {
       vid.play();
       setTimeout(function () { pauseVid(); }, 1000);
@@ -283,6 +295,7 @@ function checkVidCurrentTime() {
     vid.playbackRate = 0.4;
     vid.play();
     count = 0
+    setTimeout(function () { block(); }, 3000);
   }
 }
 
