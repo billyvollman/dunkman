@@ -8,7 +8,7 @@ let span = document.querySelectorAll("span")
 let dunkedOn = document.querySelector(".got-dunked-on")
 let dunkedBlocked = document.querySelector(".dunk-block")
 
-let bullsLogo = document.querySelector(".img-bull-logo")
+// let bullsLogo = document.querySelector(".img-bull-logo")
 let playAgain = document.querySelector(".play-again")
 
 
@@ -16,6 +16,7 @@ let playAgain = document.querySelector(".play-again")
 // let shotsRemainingNum = Number(shotsRemaining[shotsRemaining.length - 1])
 
 let count = 0
+let dunkCount = 0
 let result = ""
 let videoTime = 0
 let visibleLetters = []
@@ -149,8 +150,9 @@ fetchTeams();
 
 
 function dunk() {
-  vid.playbackRate = 0.3;
+  dunkCount++
   vid.currentTime = 4.4
+  vid.playbackRate = 0.3;
   vid.style.opacity = 0.35
   vid.play()
   dunkedOn.style.display = 'unset'
@@ -173,21 +175,27 @@ function pauseVid() {
 }
 
 function playVid() {
-  if (result === "blocked") {
-    console.log('blocked')
-    videoSrc.setAttribute('src', 'jordandunks_trim.mp4')
-    // vid.load();
-    vid.currentTime = videoTime
-    vid.playbackRate = 0.75;
+  console.log(result)
+  // if (result === "blocked") {
+  //   console.log('blocked')
+  //   videoSrc.setAttribute('src', 'jordandunks_trim.mp4')
+  //   // vid.load();
+  //   vid.currentTime = videoTime
+  //   vid.playbackRate = 0.75;
+  //   vid.play()
+  // } else 
+  if (result === "dunk") {
     vid.play()
   } else {
     count++
     vid.playbackRate = 0.75;
     if (count > 6) {
-      result = "dunk"
+      // result = "dunk"
+      result = "blocked"
       vid.play();
       count = 0
-      setTimeout(function () { dunk(); }, 3000);
+      // setTimeout(function () { dunk(); }, 3000);
+      // setTimeout(function () { block(); }, 3000);
     } else {
       vid.play();
       setTimeout(function () { pauseVid(); }, 1000);
@@ -203,7 +211,7 @@ function checkForWin() {
   let randomWordFilteredNoEmptyChar = randomWordFiltered.filter(char => char !== " ")
   if (visibleLetters.length === uniqueRandomWordNoEmptyChar.length) {
     console.log("winner")
-    return "blocked"
+    return "dunk"
   } else {
     return ""
   }
@@ -213,28 +221,46 @@ function changeColor() {
   // span.forEach(char => char.classList.toggle("black"))
   // span.forEach(char => char.style.color = "black")
   shots.classList.toggle("red")
+  if (shots.textContent === "00") {
+    console.log(randomWord)
+    updateWord()
+  }
 }
 
 function updateWord(displayChar) {
   row = '<div class="row">'
 
-  randomWord.forEach(char => {
-    if (char === " ") {
-      row += `</div><div class="row"><div class="guess-letter-space">${char}</div></div><div class="row">`
-    } else if (char === displayChar || visibleLetters.includes(char)) {
-      // char === displayChar ? char = displayChar : char = char
-      // row += `<div class="guess-letter-char"><span>${char}</span></div>`
-      if (char === displayChar) {
-        char = displayChar
-        row += `<div class="guess-letter-char"><span>${char}</span></div>`
+  if (shots.textContent === "00") {
+    console.log(randomWord)
+    randomWord.forEach(char => {
+      if (char === " ") {
+        row += `</div><div class="row"><div class="guess-letter-space">${char}</div></div><div class="row">`
       } else {
+        char = char
+        row += `<div class="guess-letter-char"><span>${char}</span></div>`
+      }
+    })
+
+  } else {
+    randomWord.forEach(char => {
+      if (char === " ") {
+        row += `</div><div class="row"><div class="guess-letter-space">${char}</div></div><div class="row">`
+      } else if (char === displayChar || visibleLetters.includes(char)) {
+        // char === displayChar ? char = displayChar : char = char
+        // row += `<div class="guess-letter-char"><span>${char}</span></div>`
+        if (char === displayChar) {
+          char = displayChar
+          row += `<div class="guess-letter-char"><span>${char}</span></div>`
+        } else {
+          row += `<div class="guess-letter-char">${char}</div>`
+        }
+      } else {
+        char = ''
         row += `<div class="guess-letter-char">${char}</div>`
       }
-    } else {
-      char = ''
-      row += `<div class="guess-letter-char">${char}</div>`
-    }
-  })
+    })
+
+  }
 
   row += '</div>'
   guessWord.innerHTML = row
@@ -256,18 +282,17 @@ function updateShotsRemaining() {
   shots.textContent = (Number(shots.textContent) - 1).toString().padStart(2, 0)
   shots.classList.toggle("red")
   setTimeout(function () { changeColor(); }, 1000);
-
 }
 
 function letterClick(e) {
+  let character = e.target.textContent
   if (!e.target.classList.contains("clicked") && result !== "blocked" && result !== "dunk" && vid.paused) {
     e.target.classList.toggle("clicked")
-    let character = e.target.textContent
     if (isLetterInWord(character)) {
       visibleLetters = [...visibleLetters, character]
       result = checkForWin()
       console.log(result)
-      if (result === "blocked") {
+      if (result === "dunk") {
         playVid()
       }
     } else {
@@ -295,8 +320,23 @@ function checkVidCurrentTime() {
     vid.playbackRate = 0.4;
     vid.play();
     count = 0
-    setTimeout(function () { block(); }, 3000);
+    setTimeout(function () { block(); }, 3500);
   }
+
+  if (vid.currentTime > 6.25 && result === "dunk" && dunkCount === 0) {
+    dunk()
+  }
+
+  // if (vid.currentTime > 4.4 && result === "dunk") {
+  //   // result = "dunk"
+  //   // vid.pause();
+  //   // videoSrc.setAttribute('src', 'blocked_shot_trim.mp4')
+  //   // vid.load();
+  //   // vid.playbackRate = 0.4;
+  //   // vid.play();
+  //   count = 0
+  //   setTimeout(function () { dunk(); }, 3000);
+  // }
 }
 
 function newGame() {
@@ -308,5 +348,5 @@ setInterval(function () { checkVidCurrentTime(); }, 500);
 
 letters.forEach(letter => letter.addEventListener('click', letterClick))
 letters.forEach(letter => letter.addEventListener('mousedown', mousedown))
-bullsLogo.addEventListener('click', newGame)
+// bullsLogo.addEventListener('click', newGame)
 playAgain.addEventListener('click', newGame)
