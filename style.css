@@ -25,16 +25,21 @@ html {
   position: relative;
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
-  padding: 40px 20px 20px;
+  padding: 40px 20px;
   border: 1px solid #888;
   width: 40%; /* Could be more or less, depending on screen size */
   border-radius: 5px;
 }
 
 .modal-content > p {
-  font-size: 1vw;
   padding-bottom: 10px;
+  font-size: 1vw;
+}
+
+.modal-content > ul {
+  margin: 0 20px;
   text-align: justify;
+  font-size: 1vw;
 }
 
 /* The Close Button */
@@ -55,6 +60,12 @@ html {
   cursor: pointer;
 }
 
+.about-game-title {
+  text-align: center;
+  font-size: 2vw;
+  margin-bottom: 10px;
+}
+
 header {
   display: flex;
   align-items: center;
@@ -67,6 +78,7 @@ section {
   /* border: solid 1px black; */
   flex: 1;
   display: flex;
+  justify-content: center;
   /* color: rgba(225, 222, 222, 1); */
   /* color: red; */
   margin: 15px 0;
@@ -469,6 +481,13 @@ video {
   .letters-and-guessword {
     width: 65%;
   }
+
+  .modal-content > p,
+  .modal-content > ul {
+    font-size: 1.5vw;
+    /* padding-bottom: 10px; */
+    /* text-align: justify; */
+  }
 }
 
 /* @media (max-width: 650px) {
@@ -499,9 +518,9 @@ video {
   }
 
   .modal-content > p {
-    font-size: 3vw;
-    padding-bottom: 10px;
-    text-align: justify;
+    /* font-size: 3vw; */
+    /* padding-bottom: 10px; */
+    /* text-align: justify; */
   }
 }
 
@@ -521,6 +540,13 @@ video {
 
   .video-container {
     height: 70%;
+  }
+
+  .modal-content > p,
+  .modal-content > ul {
+    font-size: 2.25vw;
+    /* padding-bottom: 10px; */
+    /* text-align: justify; */
   }
 }
 
@@ -596,10 +622,11 @@ video {
     width: 60%;
   }
 
-  .modal-content > p {
+  .modal-content > p,
+  .modal-content > ul {
     font-size: 3vw;
-    padding-bottom: 10px;
-    text-align: justify;
+    /* padding-bottom: 10px; */
+    /* text-align: justify; */
   }
 
   .got-dunked-on {
