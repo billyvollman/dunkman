@@ -186,6 +186,7 @@ function playVid() {
   // } else 
   if (result === "dunk") {
     vid.play()
+    count = 0
   } else {
     count++
     vid.playbackRate = 0.75;
