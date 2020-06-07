@@ -19,6 +19,7 @@ let visibleLetters = []
 let randomWord = ""
 let prevRandomWords = []
 vid.currentTime = 0.01
+vid.load()
 
 // Get the modal
 var modal = document.getElementById("myModal");
