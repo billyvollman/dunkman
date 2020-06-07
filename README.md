@@ -2,7 +2,11 @@
 
 Dunkman is a basketball version of the classic [Hangman](<https://en.wikipedia.org/wiki/Hangman_(game)>) game.
 
-Your goal is to dunk the ball 🏀 + 🗑 = WIN!
+## Link to web app
+
+Click link here: [Dunkman](https://billyvollman.github.io/dunkman/)
+
+## Your goal is to dunk the ball 🏀 + 🗑 = WIN!
 
 How to play:
 
