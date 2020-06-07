@@ -18,6 +18,7 @@ let videoTime = 0
 let visibleLetters = []
 let randomWord = ""
 let prevRandomWords = []
+vid.currentTime = 0.025
 
 // Get the modal
 var modal = document.getElementById("myModal");
@@ -303,7 +304,7 @@ function newGame() {
     blockCount = 0
     visibleLetters = []
     videoSrc.setAttribute('src', 'jordandunks_trim_edit.mp4')
-    videoTime = 0
+    vid.currentTime = 0.025
     vid.load();
     vid.style.opacity = 1
     dunkedOn.style.display = 'none'
