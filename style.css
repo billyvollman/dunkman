@@ -518,7 +518,7 @@ video {
   }
 
   .video-container {
-    height: 40%;
+    height: 60%;
     width: 85%;
     margin: 0;
   }
@@ -555,7 +555,7 @@ video {
 
   .got-dunked-on {
     bottom: 45%;
-    left: 30%;
+    left: 20%;
     animation: zoom 3s;
     transform: scale(1.25) rotate(-45deg);
   }
