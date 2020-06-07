@@ -69,56 +69,37 @@ html {
 header {
   display: flex;
   align-items: center;
-  /* background-color: rgb(0, 0, 0, 0.8); */
   background-color: rgba(255, 255, 255, 0.9);
 }
 
 section {
-  /* background-color: green; */
-  /* border: solid 1px black; */
   flex: 1;
   display: flex;
   justify-content: center;
-  /* color: rgba(225, 222, 222, 1); */
-  /* color: red; */
   margin: 15px 0;
 }
 
 .logo {
-  /* border: solid 5px rgba(225, 222, 222, 1); */
   display: flex;
   border: solid 3px black;
   border-radius: 5px;
-  /* flex: 0; */
-  /* background-color: blue; */
 }
 
 .img-dunk-logo {
-  /* border: solid 1px blue; */
-  /* width: 5vw; */
-  /* width: 20%; */
   width: 2.5vw;
   min-width: 35px;
-  /* filter: invert(1); */
   padding-bottom: 5px;
 }
 
 .title {
-  /* display: flex; */
-  /* flex: 1; */
   padding: 0 10px;
   font-size: 3rem;
-  /* border: solid 1px black; */
-  /* margin-right: 20px; */
-  /* min-width: 100%; */
-  /* flex-direction: column; */
 }
 
 .play-again-container {
   display: flex;
   flex: 1;
   justify-content: center;
-  /* border: solid 1px black; */
 }
 
 .img-bull-logo {
@@ -129,7 +110,6 @@ section {
 
 .play-again {
   text-align: center;
-  /* background-color: green; */
   font-size: 12px;
   cursor: pointer;
   color: #7b7b7b;
@@ -163,15 +143,12 @@ section {
 .rules-container {
   display: flex;
   flex: 1;
-  /* border: solid 1px black; */
   justify-content: center;
   font-size: 26px;
 }
 
 .rules {
   flex: 0;
-  /* background-color: blue; */
-  /* border: solid 1px black; */
 }
 
 .rules:hover {
@@ -205,42 +182,26 @@ body {
 }
 
 main {
-  /* background-color: mistyrose; */
   width: 75%;
   margin: auto;
-  /* font-family: sans-serif; */
 }
 
 .game-container {
   display: flex;
   height: 75vh;
   padding: 5% 5% 5%;
-  /* width: 100%;
-  height: 100%; */
   align-items: center;
   /* background-color: aqua; */
-
-  /* flex: 1; */
-}
-
-.game-container > * {
-  /* flex: 1 100%; */
 }
 
 .letters-and-guessword {
-  /* flex-grow: 1; */
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  /* justify-content: space-evenly; */
-  /* width: 50%; */
   height: 100%;
   width: 100%;
-  /* margin: 5% 2.5% 5% 5%; */
   margin-right: 2.5%;
   border: 0.5rem solid rgba(255, 255, 255, 0);
   background-color: rgba(255, 255, 255, 0.8);
-  /* padding: 5%; */
   border-radius: 1rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   overflow-y: auto;
@@ -287,22 +248,10 @@ main {
 }
 
 .row {
-  /* width: 100%; */
   display: flex;
-  /* flex: 1; */
   flex-wrap: wrap;
   margin: 0 auto;
-  /* border: solid 2px red; */
-  /* align-items: center; */
   justify-content: center;
-}
-
-.row > * {
-  /* flex: 1 100%; */
-}
-
-.row .letter:first-of-type {
-  /* margin-left: 0; */
 }
 
 .letter {
@@ -363,11 +312,6 @@ main {
 }
 
 .guess-word-section {
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* border: solid; */
   text-align: center;
 }
 
@@ -377,12 +321,8 @@ main {
 }
 
 .word {
-  /* display: flex; */
-  /* flex-direction: column; */
   margin: 2vh 0;
   font-size: 2.5vw;
-  /* font-size: 2.5vw; */
-  /* border: solid 2px red; */
 }
 
 .guess-letter-char {
@@ -396,29 +336,18 @@ main {
 }
 
 .guess-letter-char > span {
-  /* animation: flash linear 1s; */
-  /* color: green; */
-  /* font-size: 50px; */
-  /* animation-name: blinker; */
-  /* animation-duration: 1s; */
   animation: flash 1s;
 }
 
 .video-container {
-  /* display: flex; */
-  /* flex-direction: column; */
   height: 100%;
   width: 100%;
-  /* height: 50vh; */
-  /* width: 50%; */
   overflow: hidden;
   position: relative;
   border: 0.5rem solid rgba(244, 65, 51, 0.7);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  /* margin: 5% 5% 5% 2.5%; */
   margin-left: 2.5%;
   border-radius: 1rem;
-  /* padding: 5%; */
   background-color: rgba(196, 196, 196, 1);
   position: relative;
 }
@@ -440,7 +369,6 @@ main {
   position: absolute;
   bottom: 50%;
   left: 35%;
-  /* transform: rotate(-45deg); */
   animation: zoom 3s;
   transform: scale(3) rotate(-45deg);
 }
@@ -475,7 +403,6 @@ video {
   object-fit: cover;
   width: 100%;
   height: 100%;
-  /* opacity: 0.4; */
 }
 
 @media (max-width: 1400px) {
@@ -504,16 +431,8 @@ video {
   .modal-content > p,
   .modal-content > ul {
     font-size: 1.5vw;
-    /* padding-bottom: 10px; */
-    /* text-align: justify; */
   }
 }
-
-/* @media (max-width: 650px) {
-  main {
-    width: 80%;
-  }
-} */
 
 @media (max-width: 1100px) {
   .mj-basket-bg {
@@ -535,21 +454,11 @@ video {
   .modal-content {
     width: 60%;
   }
-
-  .modal-content > p {
-    /* font-size: 3vw; */
-    /* padding-bottom: 10px; */
-    /* text-align: justify; */
-  }
 }
 
 @media (max-width: 768px) {
   main {
     width: 95%;
-  }
-
-  .game-container {
-    /* flex-direction: column; */
   }
 
   .letters-and-guessword {
@@ -564,8 +473,6 @@ video {
   .modal-content > p,
   .modal-content > ul {
     font-size: 2.25vw;
-    /* padding-bottom: 10px; */
-    /* text-align: justify; */
   }
 }
 
@@ -644,8 +551,6 @@ video {
   .modal-content > p,
   .modal-content > ul {
     font-size: 3vw;
-    /* padding-bottom: 10px; */
-    /* text-align: justify; */
   }
 
   .got-dunked-on {

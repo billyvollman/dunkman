@@ -7,13 +7,8 @@ let guessWordSection = document.querySelector(".guess-word-section")
 let span = document.querySelectorAll("span")
 let dunkedOn = document.querySelector(".got-dunked-on")
 let dunkBlocked = document.querySelector(".dunk-block")
-
 let bullsLogo = document.querySelector(".img-bull-logo")
 let playAgain = document.querySelector(".play-again")
-
-
-// let shotsRemaining = document.querySelector(".shots").textContent.split("")
-// let shotsRemainingNum = Number(shotsRemaining[shotsRemaining.length - 1])
 
 let count = 0
 let dunkCount = 0
@@ -21,8 +16,6 @@ let blockCount = 0
 let result = ""
 let videoTime = 0
 let visibleLetters = []
-// let teamNames = []
-// let playerNames = ["Michael Jordan", "Kareem AbdulJabbar", "Carmelo Anthony", "Ray Allen", "Kobe Bryant", "Larry Bird", "Julius Erving", "Patrick Ewing", "Tim Duncan", "Kevin Durant", "Clyde Drexler", "Kevin Garnett", "Dwight Howard", "James Harden", "LeBron James", "Magic Johnson", "Karl Malone", "Reggie Miller", "Dirk Nowitzki", "Steve Nash", "Shaquille ONeal", "Hakeem Olajuwon", "Charles Barkley", "Wilt Chamberlain", "Vince Carter", "Stephen Curry", "Dominique Wilkins", "John Stockton", "John Starks", "Steve Francis", "Tracy McGrady", "Bob Cousy", "Scottie Pippen", "BJ Armstrong", "Bill Cartwright", "Horace Grant", "John Paxson", "Will Perdue", "Dennis Rodman", "Luc Longley", "Toni Kukoc", "Steve Kerr", "Ron Harper", "Phil Jackson", "Rudy Tomjanovich", "Dikembe Mutombo"]
 let randomWord = ""
 let prevRandomWords = []
 
@@ -62,12 +55,7 @@ function loadGuessWordToDom() {
       char = ''
       row += `<div class="guess-letter-char">${char}</div>`
     }
-
-    // char === " "
-    //   ? div += `<div class="guess-letter-space">${char}</div>`
-    //   : div += `<div class="guess-letter-char">${char}</div>`
   })
-  // guessWord.innerHTML = div
   row += '</div>'
   guessWord.innerHTML = row
 }
@@ -125,42 +113,6 @@ const fetchTeams = () => {
 
 fetchTeams();
 
-
-// const isVideoPlaying = video => !!(video.currentTime > 0 && !video.paused && !video.ended && video.readyState > 2)
-
-
-// let randomNum = Math.floor(Math.random() * teamNames.length - 1) + 1
-// console.log(randomNum)
-// console.log(teamNames[randomNum])
-// let randomWord = teamNames[randomNum].toUpperCase().split("")
-
-
-// Filtering random word to remove duplicate letters.  Will use later to check length against visible letters array to find winner
-// let uniqueRandomWord = [...new Set(randomWord)]
-// let randomWordFiltered = randomWord.filter((v, i) => randomWord.indexOf(v) === i)
-// let uniqueRandomWordNoEmptyChar = uniqueRandomWord.filter(char => char !== " ")
-// let randomWordFilteredNoEmptyChar = randomWordFiltered.filter(char => char !== " ")
-
-
-// let div = ''
-// let row = '<div class="row">'
-
-// randomWord.forEach(char => {
-//   if (char === " ") {
-//     row += `</div><div class="row"><div class="guess-letter-space">${char}</div></div><div class="row">`
-//   } else {
-//     char = ''
-//     row += `<div class="guess-letter-char">${char}</div>`
-//   }
-
-//   // char === " "
-//   //   ? div += `<div class="guess-letter-space">${char}</div>`
-//   //   : div += `<div class="guess-letter-char">${char}</div>`
-// })
-// // guessWord.innerHTML = div
-// row += '</div>'
-// guessWord.innerHTML = row
-
 function turnOnPlayAgainBtn() {
   bullsLogo.style.filter = "unset"
   playAgain.style.color = "black"
@@ -197,14 +149,6 @@ function pauseVid() {
 
 function playVid() {
   console.log(result)
-  // if (result === "blocked") {
-  //   console.log('blocked')
-  //   videoSrc.setAttribute('src', 'jordandunks_trim.mp4')
-  //   // vid.load();
-  //   vid.currentTime = videoTime
-  //   vid.playbackRate = 0.75;
-  //   vid.play()
-  // } else 
   if (result === "dunk") {
     vid.playbackRate = 0.7
     vid.play()
@@ -213,12 +157,9 @@ function playVid() {
     count++
     vid.playbackRate = 0.7;
     if (count > 6) {
-      // result = "dunk"
       result = "blocked"
       vid.play();
       count = 0
-      // setTimeout(function () { dunk(); }, 3000);
-      // setTimeout(function () { block(); }, 3000);
     } else {
       vid.play();
       setTimeout(function () { pauseVid(); }, 1000);
@@ -241,8 +182,6 @@ function checkForWin() {
 }
 
 function changeColor() {
-  // span.forEach(char => char.classList.toggle("black"))
-  // span.forEach(char => char.style.color = "black")
   shots.classList.toggle("red")
   if (shots.textContent === "00") {
     console.log(randomWord)
@@ -269,8 +208,6 @@ function updateWord(displayChar) {
       if (char === " ") {
         row += `</div><div class="row"><div class="guess-letter-space">${char}</div></div><div class="row">`
       } else if (char === displayChar || visibleLetters.includes(char)) {
-        // char === displayChar ? char = displayChar : char = char
-        // row += `<div class="guess-letter-char"><span>${char}</span></div>`
         if (char === displayChar) {
           char = displayChar
           row += `<div class="guess-letter-char"><span>${char}</span></div>`
@@ -299,9 +236,6 @@ function isLetterInWord(char) {
 }
 
 function updateShotsRemaining() {
-  // shotsRemainingNum -= 1
-  // shots.innerHTML = `Shots Remaining </br>${shotsRemainingNum.toString().padStart(2, 0)} `
-
   shots.textContent = (Number(shots.textContent) - 1).toString().padStart(2, 0)
   shots.classList.toggle("red")
   setTimeout(function () { changeColor(); }, 1000);
