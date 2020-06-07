@@ -6,9 +6,9 @@ let shots = document.querySelector(".count")
 let guessWordSection = document.querySelector(".guess-word-section")
 let span = document.querySelectorAll("span")
 let dunkedOn = document.querySelector(".got-dunked-on")
-let dunkedBlocked = document.querySelector(".dunk-block")
+let dunkBlocked = document.querySelector(".dunk-block")
 
-// let bullsLogo = document.querySelector(".img-bull-logo")
+let bullsLogo = document.querySelector(".img-bull-logo")
 let playAgain = document.querySelector(".play-again")
 
 
@@ -17,12 +17,14 @@ let playAgain = document.querySelector(".play-again")
 
 let count = 0
 let dunkCount = 0
+let blockCount = 0
 let result = ""
 let videoTime = 0
 let visibleLetters = []
 // let teamNames = []
 // let playerNames = ["Michael Jordan", "Kareem AbdulJabbar", "Carmelo Anthony", "Ray Allen", "Kobe Bryant", "Larry Bird", "Julius Erving", "Patrick Ewing", "Tim Duncan", "Kevin Durant", "Clyde Drexler", "Kevin Garnett", "Dwight Howard", "James Harden", "LeBron James", "Magic Johnson", "Karl Malone", "Reggie Miller", "Dirk Nowitzki", "Steve Nash", "Shaquille ONeal", "Hakeem Olajuwon", "Charles Barkley", "Wilt Chamberlain", "Vince Carter", "Stephen Curry", "Dominique Wilkins", "John Stockton", "John Starks", "Steve Francis", "Tracy McGrady", "Bob Cousy", "Scottie Pippen", "BJ Armstrong", "Bill Cartwright", "Horace Grant", "John Paxson", "Will Perdue", "Dennis Rodman", "Luc Longley", "Toni Kukoc", "Steve Kerr", "Ron Harper", "Phil Jackson", "Rudy Tomjanovich", "Dikembe Mutombo"]
 let randomWord = ""
+let prevRandomWords = []
 
 // Get the modal
 var modal = document.getElementById("myModal");
@@ -70,14 +72,14 @@ function loadGuessWordToDom() {
   guessWord.innerHTML = row
 }
 
-function createGuessWord(teamsAndPlayersNames) {
+function createGuessWord(teamsAndPlayersNamesArr) {
 
-  let randomNum = Math.floor(Math.random() * teamsAndPlayersNames.length - 1) + 1
-  randomWord = teamsAndPlayersNames[randomNum].toUpperCase().split("")
+  let randomNum = Math.floor(Math.random() * teamsAndPlayersNamesArr.length - 1) + 1
+  randomWord = teamsAndPlayersNamesArr[randomNum].toUpperCase().split("")
   loadGuessWordToDom()
   console.log(randomNum)
-  console.log(teamsAndPlayersNames.length)
-  console.log(teamsAndPlayersNames)
+  console.log(teamsAndPlayersNamesArr.length)
+  console.log(teamsAndPlayersNamesArr)
 
 }
 
@@ -95,7 +97,18 @@ const saveTeamsAndPlayers = (teams) => {
   // teams.forEach(team => teamNames = [...teamNames, team])
 
   teamsAndPlayersNames = [...teamNames, ...playerNames]
-  createGuessWord(teamsAndPlayersNames)
+  let teamsAndPlayersNamesNotSeenBefore = []
+
+  if (prevRandomWords.length < 76) {
+    teamsAndPlayersNames.forEach(str => {
+      if (!prevRandomWords.includes(str.toUpperCase())) {
+        teamsAndPlayersNamesNotSeenBefore = [...teamsAndPlayersNamesNotSeenBefore, str]
+      }
+    })
+    createGuessWord(teamsAndPlayersNamesNotSeenBefore)
+  } else {
+    createGuessWord(teamsAndPlayersNames)
+  }
 }
 
 const fetchTeams = () => {
@@ -148,6 +161,11 @@ fetchTeams();
 // row += '</div>'
 // guessWord.innerHTML = row
 
+function turnOnPlayAgainBtn() {
+  bullsLogo.style.filter = "unset"
+  playAgain.style.color = "black"
+  playAgain.classList.toggle("heartbeat")
+}
 
 function dunk() {
   dunkCount++
@@ -156,14 +174,17 @@ function dunk() {
   vid.style.opacity = 0.35
   vid.play()
   dunkedOn.style.display = 'unset'
+  turnOnPlayAgainBtn()
 }
 
 function block() {
+  blockCount++
   vid.currentTime = 0
   vid.playbackRate = 0.3;
   vid.style.opacity = 0.35
   vid.play()
-  dunkedBlocked.style.display = 'unset'
+  dunkBlocked.style.display = 'unset'
+  turnOnPlayAgainBtn()
 }
 
 function pauseVid() {
@@ -185,11 +206,12 @@ function playVid() {
   //   vid.play()
   // } else 
   if (result === "dunk") {
+    vid.playbackRate = 0.7
     vid.play()
     count = 0
   } else {
     count++
-    vid.playbackRate = 0.75;
+    vid.playbackRate = 0.7;
     if (count > 6) {
       // result = "dunk"
       result = "blocked"
@@ -327,21 +349,33 @@ function checkVidCurrentTime() {
   if (vid.currentTime > 6.25 && result === "dunk" && dunkCount === 0) {
     dunk()
   }
-
-  // if (vid.currentTime > 4.4 && result === "dunk") {
-  //   // result = "dunk"
-  //   // vid.pause();
-  //   // videoSrc.setAttribute('src', 'blocked_shot_trim.mp4')
-  //   // vid.load();
-  //   // vid.playbackRate = 0.4;
-  //   // vid.play();
-  //   count = 0
-  //   setTimeout(function () { dunk(); }, 3000);
-  // }
 }
 
 function newGame() {
-  location.reload()
+  if (dunkCount > 0 || blockCount > 0) {
+    playAgain.classList.toggle("heartbeat")
+    bullsLogo.style.filter = "grayscale(1) brightness(2.5)"
+    playAgain.style.color = "#7b7b7b"
+    prevRandomWords = [...prevRandomWords, randomWord.join("")]
+    console.log(prevRandomWords)
+    letters.forEach(letter => {
+      if (letter.outerHTML.includes("clicked")) {
+        letter.classList.toggle("clicked")
+      }
+    })
+    shots.textContent = "07"
+    fetchTeams()
+    result = ""
+    dunkCount = 0
+    blockCount = 0
+    visibleLetters = []
+    videoSrc.setAttribute('src', 'jordandunks_trim.mp4')
+    videoTime = 0
+    vid.load();
+    vid.style.opacity = 1
+    dunkedOn.style.display = 'none'
+    dunkBlocked.style.display = 'none'
+  }
 }
 
 setInterval(function () { checkVidCurrentTime(); }, 500);
@@ -349,5 +383,4 @@ setInterval(function () { checkVidCurrentTime(); }, 500);
 
 letters.forEach(letter => letter.addEventListener('click', letterClick))
 letters.forEach(letter => letter.addEventListener('mousedown', mousedown))
-// bullsLogo.addEventListener('click', newGame)
 playAgain.addEventListener('click', newGame)
