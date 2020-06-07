@@ -477,6 +477,10 @@ video {
 }
 
 @media (max-width: 650px) {
+  .about-game-title {
+    font-size: 4vw;
+  }
+
   main {
     width: 95%;
   }
