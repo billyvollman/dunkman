@@ -270,12 +270,15 @@ function mousedown(e) {
 
 function checkVidCurrentTime() {
   if (vid.currentTime > 4.4 && result === "blocked") {
+    console.log(vid.poster)
     vid.poster = "block_vid_poster.jpg"
+    console.log(vid.poster)
     vid.pause();
     videoSrc.setAttribute('src', 'blocked_shot_trim.mp4')
     vid.load();
     vid.playbackRate = 0.4;
     vid.play();
+    console.log(vid.poster)
     count = 0
     setTimeout(function () { block(); }, 3500);
   }
