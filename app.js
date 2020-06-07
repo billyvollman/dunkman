@@ -18,7 +18,7 @@ let videoTime = 0
 let visibleLetters = []
 let randomWord = ""
 let prevRandomWords = []
-vid.currentTime = 0.025
+vid.currentTime = 0.01
 
 // Get the modal
 var modal = document.getElementById("myModal");
@@ -271,7 +271,7 @@ function mousedown(e) {
 
 function checkVidCurrentTime() {
   if (vid.currentTime > 4.4 && result === "blocked") {
-    // vid.pause();
+    vid.pause();
     videoSrc.setAttribute('src', 'blocked_shot_trim.mp4')
     vid.load();
     vid.playbackRate = 0.4;
