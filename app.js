@@ -87,7 +87,7 @@ const saveTeamsAndPlayers = (teams) => {
   teamsAndPlayersNames = [...teamNames, ...playerNames]
   let teamsAndPlayersNamesNotSeenBefore = []
 
-  if (prevRandomWords.length < 76) {
+  if (prevRandomWords.length < teamsAndPlayersNames.length) {
     teamsAndPlayersNames.forEach(str => {
       if (!prevRandomWords.includes(str.toUpperCase())) {
         teamsAndPlayersNamesNotSeenBefore = [...teamsAndPlayersNamesNotSeenBefore, str]
@@ -270,7 +270,6 @@ function mousedown(e) {
 
 function checkVidCurrentTime() {
   if (vid.currentTime > 4.4 && result === "blocked") {
-    // result = "dunk"
     vid.pause();
     videoSrc.setAttribute('src', 'blocked_shot_trim.mp4')
     vid.load();
