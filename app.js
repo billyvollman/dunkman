@@ -270,6 +270,7 @@ function mousedown(e) {
 
 function checkVidCurrentTime() {
   if (vid.currentTime > 4.4 && result === "blocked") {
+    vid.poster = "block_vid_poster.jpg"
     vid.pause();
     videoSrc.setAttribute('src', 'blocked_shot_trim.mp4')
     vid.load();
@@ -302,6 +303,7 @@ function newGame() {
     dunkCount = 0
     blockCount = 0
     visibleLetters = []
+    vid.poster = "jordan_vid_poster.jpg"
     videoSrc.setAttribute('src', 'jordandunks_trim_edit.mp4')
     vid.currentTime = 0
     vid.load();
