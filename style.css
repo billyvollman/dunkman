@@ -360,7 +360,7 @@ main {
   left: 35%;
   transform: rotate(-45deg);
   animation: zoom 3s;
-  transform: scale(3) rotate(-45deg);
+  transform: scale(2.5) rotate(-45deg);
 }
 
 .dunk-block {
@@ -370,7 +370,7 @@ main {
   bottom: 50%;
   left: 35%;
   animation: zoom 3s;
-  transform: scale(3) rotate(-45deg);
+  transform: scale(2.5) rotate(-45deg);
 }
 
 @keyframes zoom {
@@ -380,7 +380,7 @@ main {
   }
   100% {
     transition-timing-function: linear;
-    transform: scale(3) rotate(-45deg);
+    transform: scale(2.5) rotate(-45deg);
   }
 }
 
@@ -556,13 +556,26 @@ video {
   .got-dunked-on {
     bottom: 45%;
     left: 30%;
-    transform: scale(2) rotate(-45deg);
+    animation: zoom 3s;
+    transform: scale(1.5) rotate(-45deg);
   }
 
   .dunk-block {
     bottom: 30%;
     left: 25%;
-    transform: scale(2) rotate(-30deg);
+    animation: zoom 3s;
+    transform: scale(1.5) rotate(-45deg);
+  }
+
+  @keyframes zoom {
+    0% {
+      transition-timing-function: linear;
+      transform: scale(0) rotate(-45deg);
+    }
+    100% {
+      transition-timing-function: linear;
+      transform: scale(1.5) rotate(-45deg);
+    }
   }
 }
 
