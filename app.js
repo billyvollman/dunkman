@@ -302,7 +302,7 @@ function newGame() {
     dunkCount = 0
     blockCount = 0
     visibleLetters = []
-    videoSrc.setAttribute('src', 'jordandunks_trim.mp4')
+    videoSrc.setAttribute('src', 'jordandunks_trim_edit.mp4')
     videoTime = 0
     vid.load();
     vid.style.opacity = 1
