@@ -120,6 +120,7 @@ function turnOnPlayAgainBtn() {
 }
 
 function dunk() {
+  vid.poster = "jordan_vid_poster.jpg"
   dunkCount++
   vid.currentTime = 4.4
   vid.playbackRate = 0.3;
