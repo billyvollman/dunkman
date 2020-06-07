@@ -487,7 +487,7 @@ video {
   }
 
   .letters-and-guessword {
-    height: 90%;
+    height: 100%;
     width: 85%;
     margin: 5% 0 0 0;
   }
@@ -518,14 +518,14 @@ video {
   }
 
   .video-container {
-    height: 70%;
+    height: 40%;
     width: 85%;
     margin: 0;
   }
 
   .title {
     font-size: 1.5rem;
-    padding: 5%;
+    padding: 10px;
   }
 
   .empty {
@@ -557,14 +557,14 @@ video {
     bottom: 45%;
     left: 30%;
     animation: zoom 3s;
-    transform: scale(1.5) rotate(-45deg);
+    transform: scale(1.25) rotate(-45deg);
   }
 
   .dunk-block {
     bottom: 30%;
     left: 25%;
     animation: zoom 3s;
-    transform: scale(1.5) rotate(-45deg);
+    transform: scale(1.25) rotate(-45deg);
   }
 
   @keyframes zoom {
@@ -574,7 +574,7 @@ video {
     }
     100% {
       transition-timing-function: linear;
-      transform: scale(1.5) rotate(-45deg);
+      transform: scale(1.25) rotate(-45deg);
     }
   }
 }
@@ -582,7 +582,7 @@ video {
 @media (max-width: 350px) {
   .title {
     font-size: 1rem;
-    padding: 5%;
+    padding: 10px;
   }
 
   .img-dunk-logo {
@@ -595,6 +595,10 @@ video {
 }
 
 @media (max-width: 230px) {
+  .title {
+    padding: 5%;
+  }
+
   header {
     flex-direction: column;
   }
