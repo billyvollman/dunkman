@@ -271,7 +271,7 @@ function mousedown(e) {
 
 function checkVidCurrentTime() {
   if (vid.currentTime > 4.4 && result === "blocked") {
-    vid.pause();
+    // vid.pause();
     videoSrc.setAttribute('src', 'blocked_shot_trim.mp4')
     vid.load();
     vid.playbackRate = 0.4;
