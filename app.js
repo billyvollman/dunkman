@@ -151,8 +151,8 @@ function playVid() {
     vid.playbackRate = 0.7;
     if (count > 6) {
       result = "blocked"
-      vid.play();
       vid.poster = "block_vid_poster.jpg"
+      vid.play();
       count = 0
     } else {
       vid.play();
