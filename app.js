@@ -65,10 +65,6 @@ function createGuessWord(teamsAndPlayersNamesArr) {
   let randomNum = Math.floor(Math.random() * teamsAndPlayersNamesArr.length - 1) + 1
   randomWord = teamsAndPlayersNamesArr[randomNum].toUpperCase().split("")
   loadGuessWordToDom()
-  console.log(randomNum)
-  console.log(teamsAndPlayersNamesArr.length)
-  console.log(teamsAndPlayersNamesArr)
-
 }
 
 const saveTeamsAndPlayers = (teams) => {
@@ -76,7 +72,6 @@ const saveTeamsAndPlayers = (teams) => {
   let teamNames = []
   teams.forEach(team => {
     if (team.full_name === "Philadelphia 76ers") {
-      console.log(team.full_name)
       teamNames = [...teamNames, "Philadelphia Seventy Sixers"]
     } else {
       teamNames = [...teamNames, team.full_name]
@@ -103,7 +98,6 @@ const fetchTeams = () => {
   axios.get('https://www.balldontlie.io/api/v1/teams')
     .then(response => {
       const teams = response.data.data;
-      console.log(`GET list teams`, teams);
       saveTeamsAndPlayers(teams)
     })
     .catch(error => console.error(error));
@@ -144,12 +138,10 @@ function pauseVid() {
   guessWordSection.classList.remove("animate__animated")
   guessWordSection.classList.remove("animate__shakeX")
   vid.pause();
-  console.log(vid.currentTime)
   videoTime = vid.currentTime
 }
 
 function playVid() {
-  console.log(result)
   if (result === "dunk") {
     vid.playbackRate = 0.7
     vid.play()
@@ -176,7 +168,6 @@ function checkForWin() {
   let uniqueRandomWordNoEmptyChar = uniqueRandomWord.filter(char => char !== " ")
   let randomWordFilteredNoEmptyChar = randomWordFiltered.filter(char => char !== " ")
   if (visibleLetters.length === uniqueRandomWordNoEmptyChar.length) {
-    console.log("winner")
     return "dunk"
   } else {
     return ""
@@ -186,7 +177,6 @@ function checkForWin() {
 function changeColor() {
   shots.classList.toggle("red")
   if (shots.textContent === "00") {
-    console.log(randomWord)
     updateWord()
   }
 }
@@ -195,7 +185,6 @@ function updateWord(displayChar) {
   row = '<div class="row">'
 
   if (shots.textContent === "00") {
-    console.log(randomWord)
     randomWord.forEach(char => {
       if (char === " ") {
         row += `</div><div class="row"><div class="guess-letter-space">${char}</div></div><div class="row">`
@@ -250,7 +239,6 @@ function letterClick(e) {
     if (isLetterInWord(character)) {
       visibleLetters = [...visibleLetters, character]
       result = checkForWin()
-      console.log(result)
       if (result === "dunk") {
         playVid()
       }
@@ -263,24 +251,13 @@ function letterClick(e) {
   }
 }
 
-function mousedown(e) {
-  console.log('mouse down working')
-  if (!e.target.classList.contains("clicked") && result !== "blocked" && result !== "dunk" && vid.paused) {
-    console.log(e.target.classList)
-  }
-}
-
 function checkVidCurrentTime() {
   if (vid.currentTime > 4.4 && result === "blocked") {
-    console.log(vid.poster)
-    vid.poster = "block_vid_poster.jpg"
-    console.log(vid.poster)
     vid.pause();
     videoSrc.setAttribute('src', 'blocked_shot_trim.mp4')
     vid.load();
     vid.playbackRate = 0.4;
     vid.play();
-    console.log(vid.poster)
     count = 0
     setTimeout(function () { block(); }, 3500);
   }
@@ -293,10 +270,11 @@ function checkVidCurrentTime() {
 function newGame() {
   if (dunkCount > 0 || blockCount > 0) {
     playAgain.classList.toggle("heartbeat")
+    guessWordSection.classList.remove("animate__animated")
+    guessWordSection.classList.remove("animate__shakeX")
     bullsLogo.style.filter = "grayscale(1) brightness(2.5)"
     playAgain.style.color = "#7b7b7b"
     prevRandomWords = [...prevRandomWords, randomWord.join("")]
-    console.log(prevRandomWords)
     letters.forEach(letter => {
       if (letter.outerHTML.includes("clicked")) {
         letter.classList.toggle("clicked")
@@ -308,7 +286,6 @@ function newGame() {
     dunkCount = 0
     blockCount = 0
     visibleLetters = []
-    vid.poster = "jordan_vid_poster.jpg"
     videoSrc.setAttribute('src', 'jordandunks_trim_edit.mp4')
     vid.currentTime = 0
     vid.load();
@@ -322,5 +299,4 @@ setInterval(function () { checkVidCurrentTime(); }, 500);
 
 
 letters.forEach(letter => letter.addEventListener('click', letterClick))
-letters.forEach(letter => letter.addEventListener('mousedown', mousedown))
 playAgain.addEventListener('click', newGame)
