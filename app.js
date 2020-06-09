@@ -95,9 +95,10 @@ const saveTeamsAndPlayers = (teams) => {
 }
 
 const fetchTeams = () => {
-  axios.get('https://www.balldontlie.io/api/v1/teams')
+  axios.get('https://www.balldontlie.io/api/v1/teams', { crossdomain: true })
     .then(response => {
       const teams = response.data.data;
+      console.log(response.headers)
       saveTeamsAndPlayers(teams)
     })
     .catch(error => console.error(error));
