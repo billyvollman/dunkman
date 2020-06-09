@@ -252,7 +252,6 @@ function updateShotsRemaining() {
 
 function letterPressed(e) {
   if ((e.code === 'Enter' || e.code === 'NumpadEnter') && playAgain.classList.contains("heartbeat")) {
-    console.log('yes')
     newGame()
   }
 
