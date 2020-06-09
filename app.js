@@ -95,13 +95,15 @@ const saveTeamsAndPlayers = (teams) => {
 }
 
 const fetchTeams = () => {
-  axios.get('https://www.balldontlie.io/api/v1/teams', { crossdomain: true })
+  axios.get('https://www.balldontlie.io/api/v1/teams')
     .then(response => {
       const teams = response.data.data;
-      console.log(response.headers)
       saveTeamsAndPlayers(teams)
     })
-    .catch(error => console.error(error));
+    .catch(error => {
+      console.error(error)
+      saveTeamsAndPlayers(["San Antonio Spurs"])
+    });
   // saveTeamsAndPlayers(["San Antonio Spurs Miami Heat San Antonio Spurs Miami Heat"])
   // saveTeamsAndPlayers(["San Antonio Spurs"])
 };
