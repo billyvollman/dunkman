@@ -110,7 +110,7 @@ const saveTeamsAndPlayers = (teams) => {
 }
 
 const fetchTeams = () => {
-  axios.get('https://www.balldontlie.io/api/v1/teams')
+  axios.get('https://cors-anywhere.herokuapp.com/https://www.balldontlie.io/api/v1/teams')
     .then(response => {
       const teams = response.data.data;
       saveTeamsAndPlayers(teams)
