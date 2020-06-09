@@ -67,14 +67,31 @@ function createGuessWord(teamsAndPlayersNamesArr) {
   loadGuessWordToDom()
 }
 
+const teamNamesIfApiFail = () => {
+  let teamNamesManual = [
+    "Atlanta Hawks", "Boston Celtics", "Brooklyn Nets", "Charlotte Hornets", "Chicago Bulls", "Cleveland Cavaliers", "Dallas Mavericks", "Denver Nuggets", "Detroit Pistons", "Golden State Warriors", "Houston Rockets", "Indiana Pacers", "LA Clippers", "Los Angeles Lakers", "Memphis Grizzlies", "Miami Heat", "Milwaukee Bucks", "Minnesota Timberwolves", "New Orleans Pelicans", "New York Knicks", "Oklahoma City Thunder", "Orlando Magic", "Philadelphia 76ers", "Phoenix Suns", "Portland Trail Blazers", "Sacramento Kings", "San Antonio Spurs", "Toronto Raptors", "Utah Jazz", "Washington Wizards"
+  ]
+  return teamNamesManual
+}
+
 const saveTeamsAndPlayers = (teams) => {
   let playerNames = ["Michael Jordan", "Kareem AbdulJabbar", "Carmelo Anthony", "Ray Allen", "Kobe Bryant", "Larry Bird", "Julius Erving", "Patrick Ewing", "Tim Duncan", "Kevin Durant", "Clyde Drexler", "Kevin Garnett", "Dwight Howard", "James Harden", "LeBron James", "Magic Johnson", "Karl Malone", "Reggie Miller", "Dirk Nowitzki", "Steve Nash", "Shaquille ONeal", "Hakeem Olajuwon", "Charles Barkley", "Wilt Chamberlain", "Vince Carter", "Stephen Curry", "Dominique Wilkins", "John Stockton", "John Starks", "Steve Francis", "Tracy McGrady", "Bob Cousy", "Scottie Pippen", "BJ Armstrong", "Bill Cartwright", "Horace Grant", "John Paxson", "Will Perdue", "Dennis Rodman", "Luc Longley", "Toni Kukoc", "Steve Kerr", "Ron Harper", "Phil Jackson", "Rudy Tomjanovich", "Dikembe Mutombo"]
   let teamNames = []
   teams.forEach(team => {
-    if (team.full_name === "Philadelphia 76ers") {
-      teamNames = [...teamNames, "Philadelphia Seventy Sixers"]
+    if (team.full_name) {
+      console.log(team.full_name)
+      if (team.full_name === "Philadelphia 76ers") {
+        teamNames = [...teamNames, "Philadelphia Seventy Sixers"]
+      } else {
+        teamNames = [...teamNames, team.full_name]
+      }
     } else {
-      teamNames = [...teamNames, team.full_name]
+      console.log(team)
+      if (team === "Philadelphia 76ers") {
+        teamNames = [...teamNames, "Philadelphia Seventy Sixers"]
+      } else {
+        teamNames = [...teamNames, team]
+      }
     }
   })
   // teams.forEach(team => teamNames = [...teamNames, team])
@@ -102,7 +119,7 @@ const fetchTeams = () => {
     })
     .catch(error => {
       console.error(error)
-      saveTeamsAndPlayers(["San Antonio Spurs"])
+      saveTeamsAndPlayers(teamNamesIfApiFail())
     });
   // saveTeamsAndPlayers(["San Antonio Spurs Miami Heat San Antonio Spurs Miami Heat"])
   // saveTeamsAndPlayers(["San Antonio Spurs"])
