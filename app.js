@@ -250,6 +250,34 @@ function updateShotsRemaining() {
   setTimeout(function () { changeColor(); }, 1000);
 }
 
+function letterPressed(e) {
+  if ((e.code === 'Enter' || e.code === 'NumpadEnter') && playAgain.classList.contains("heartbeat")) {
+    console.log('yes')
+    newGame()
+  }
+
+  letters.forEach(letter => {
+    if (e.code.split('Key')[1] === letter.textContent) {
+      if (!letter.classList.contains("clicked") && result !== "blocked" && result !== "dunk" && vid.paused) {
+        letter.classList.toggle("clicked")
+        if (isLetterInWord(letter.textContent)) {
+          visibleLetters = [...visibleLetters, letter.textContent]
+          result = checkForWin()
+          if (result === "dunk") {
+            playVid()
+          }
+        } else {
+          guessWordSection.classList.add("animate__animated")
+          guessWordSection.classList.add("animate__shakeX")
+          updateShotsRemaining()
+          playVid()
+        }
+      }
+    }
+  })
+
+}
+
 function letterClick(e) {
   let character = e.target.textContent
   if (!e.target.classList.contains("clicked") && result !== "blocked" && result !== "dunk" && vid.paused) {
@@ -317,4 +345,5 @@ setInterval(function () { checkVidCurrentTime(); }, 500);
 
 
 letters.forEach(letter => letter.addEventListener('click', letterClick))
+window.addEventListener('keydown', letterPressed);
 playAgain.addEventListener('click', newGame)
