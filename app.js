@@ -79,14 +79,12 @@ const saveTeamsAndPlayers = (teams) => {
   let teamNames = []
   teams.forEach(team => {
     if (team.full_name) {
-      console.log(team.full_name)
       if (team.full_name === "Philadelphia 76ers") {
         teamNames = [...teamNames, "Philadelphia Seventy Sixers"]
       } else {
         teamNames = [...teamNames, team.full_name]
       }
     } else {
-      console.log(team)
       if (team === "Philadelphia 76ers") {
         teamNames = [...teamNames, "Philadelphia Seventy Sixers"]
       } else {
